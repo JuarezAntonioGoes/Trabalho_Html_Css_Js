@@ -56,10 +56,7 @@
             <div class="post">
                 <img src="../img/logo.png" alt="">
                 <h4>SHINE</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut minima voluptatem ad tempore officiis
-                    quis quia accusamus, eius dolorum, quo iure ratione facilis nisi autem qui iusto aspernatur iste
-                    praesentium?</p>
-
+                <p>Seja bem vindo a SHINE!</p>
 
             </div>
         </div>
@@ -68,95 +65,7 @@
     <footer class="copy">
         <p>Todos os direitos reservados SHINE 2020</p>
     </footer>
-    <script>
-        function Loading() {
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    document.querySelector('.load').classList.add('hidden');
-                }, 700)
-            })
-        }
-
-        function apiPost() {
-            const buttonSubmmit = document.querySelector('[data-enviar=""]');
-
-            buttonSubmmit.addEventListener('click', (e) => {
-                e.preventDefault();
-
-                const texto = document.querySelector('form textarea');
-
-                if (texto.value == 0) {
-                    document.querySelector('form span').classList.remove('hidden');
-                    texto.classList.add('erro');
-                    return
-                }
-
-                cadastrar(texto);
-
-                async function cadastrar(texto) {
-
-                    const link = 'https://news-api-node.herokuapp.com/api/v1/news/a8a8485d-e58e-4051-ba6b-5bb5374bac52';
-                    const newPost = {
-                        post: texto.value
-                    }
-                    const corpo = {
-                        method: "POST",
-                        body: JSON.stringify(newPost),
-                        headers: {
-                            "Content-type": "application/json"
-                        }
-                    };
-
-                    const result = await fetch(link, corpo);
-                    window.location.reload();
-                }
-
-
-
-            })
-
-        }
-
-        async function getApi() {
-            const link = 'https://news-api-node.herokuapp.com/api/v1/news/a8a8485d-e58e-4051-ba6b-5bb5374bac52';
-            const GetPost = {
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            }
-
-            const requisicao = await fetch(link, GetPost);
-            const resultGet = await requisicao.json();
-
-            resultGet.forEach(element => {
-                const div = document.createElement('div');
-                div.classList.add('post');
-                div.innerHTML = '<img src="../img/logo.png" alt=""><h4>SHINE</h4><p></p>';
-                div.querySelector('p').innerText = element.post;
-                document.querySelector('.todos-posts .post').before(div)
-
-            });
-
-
-        }
-
-
-
-        function botaoCarregarPost(item) {
-
-
-            window.addEventListener('scroll', () => {
-
-                console.log(window.scrollY);
-            })
-        }
-
-
-        getApi();
-        apiPost();
-        Loading();
-    </script>
+    <script type="module" src="./js/scriptPosts.js"> </script>
 </body>
 
 </html>
